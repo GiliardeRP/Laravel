@@ -31,6 +31,6 @@ class SeriesFormRequest extends FormRequest
         return[
             'required' => 'O campo : attribute é obrigatorio',
             'nome.min' => 'O campo nome tem que ter no minimo 2 caracteries'
-        ]
+        ];
     }
 }
