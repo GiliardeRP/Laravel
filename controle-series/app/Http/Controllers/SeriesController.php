@@ -9,15 +9,21 @@ use App\Models\Temporadas;
 use App\Services\CriadorDeSerie;
 use App\Services\RemovedorDeSerie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use LDAP\Result;
 use PhpParser\Node\Stmt\Foreach_;
 
 class SeriesController extends Controller
-
-
 {
 
+    public function __contruct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request){
+
+
         $series = Serie::query()
         ->orderBy('nome')
         ->get();

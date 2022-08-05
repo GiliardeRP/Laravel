@@ -3,6 +3,7 @@
 use App\Http\Controllers\EpisodiosController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\TemporadasController;
+use App\Http\Controllers\EntrarController;
 use App\Models\Serie;
 use Illuminate\Support\Facades\Route;
 
@@ -26,16 +27,10 @@ Route::get('/temporadas/{temporada}/episodios', [EpisodiosController::class, 'in
 
 Route::post('/temporadas/{temporada}/episodios/assistir', [EpisodiosController::class, 'assistir']);
 
-
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/entrar', [EntrarController::class, 'index']);
+Route::post('/entrar', [EntrarController::class, 'entrar']);
