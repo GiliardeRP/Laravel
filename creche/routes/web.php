@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AlunoController;
 use Illuminate\Support\Facades\Route;
+use app\Models\Creche;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('/aluno', [AlunoController::class , 'index'])->name('listar_crianca');
+
+Route::get('/aluno/create', [AlunoController::class , 'create']);
+
+Route::post('aluno/create', [AlunoController::class , 'store']);
+
+Route::delete('aluno/{id}', [AlunoController::class, 'destroy']);
+
+Route::get('aluno/edit/{id}' , [AlunoController::class, 'edit']);
+
+Route::post('aluno/edit/{id}' , [AlunoController::class, 'editar']);
