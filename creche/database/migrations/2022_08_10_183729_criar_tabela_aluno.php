@@ -20,9 +20,8 @@ return new class extends Migration
             $table->string('cpf');
             $table->string('endereco');
             $table->integer('idade');
+            $table->float('salario');
 
-            $table->integer('id_turma');
-            $table->foreign('id_turma')->references('id')->on('turma');
 
         });
     }

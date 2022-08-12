@@ -1,26 +1,25 @@
-@extends('layout')
-
-@section('cabecalho')
-<h2> Alunos cadastrados:</h2>
-@endsection
+<x-layout title="Alunos cadastrados:">
 
 
-@section('conteudo')
+    @isset($mensagemSucesso)
 
+        <div class="alert alert-success">
+            {{$mensagemSucesso}}
+        </div>
+    @endisset
 
-
-    @foreach ($escolas as $escola)
+    @foreach ($alunos as $aluno)
     <ul class="list-group mt-2">
         <li class="list-group-item d-flex justify-content-between align-items-center" >
-            Matricula: {{$escola->matricula}}<br/>
-            Nome: {{$escola->nome}} <br/>
-            Idade: {{$escola->idade}}<br/>
-            Cpf: {{$escola->cpf}}<br/>
-            Endereço: {{$escola->endereco}}
+            Matricula: {{$aluno->matricula}}<br/>
+            Nome: {{$aluno->nome}} <br/>
+            Idade: {{$aluno->idade}}<br/>
+            Cpf: {{$aluno->cpf}}<br/>
+            Endereço: {{$aluno->endereco}}
 
             <div class="d-flex justify-content-between">
-            <a href="escola/edit/{{$escola->id}}" class= "btn btn-second" href="">Editar</a>
-            <form action="/escola/{{$escola->id}}" method="post">
+            <a href="aluno/edit/{{$aluno->id}}" class= "btn btn-second" href="">Editar</a>
+            <form action="/aluno/{{$aluno->id}}" method="post">
                 @csrf
                 @method('DELETE')
             <button class= "btn btn-second">apagar</button>
@@ -33,14 +32,7 @@
 
     @endforeach
 
-
-
-
-
-
-
-<a class="btn btn-primary mt-4" href="escola/create">Adicionar</a>
+<a class="btn btn-primary mt-4" href="aluno/create">Adicionar</a>
 </form>
 
-
-@endsection
+</x-layot>

@@ -16,15 +16,19 @@ use app\Models\Creche;
 */
 
 
+Route::controller(AlunoController::class)->group(function () {
 
-Route::get('/aluno', [AlunoController::class , 'index'])->name('listar_crianca');
+    Route::get('/aluno',  'index')->name('aluno.index');
 
-Route::get('/aluno/create', [AlunoController::class , 'create']);
+    Route::get('/aluno/create', 'create')->name('aluno.create');
 
-Route::post('aluno/create', [AlunoController::class , 'store']);
+    Route::post('aluno/create', 'store')->name('aluno.store');
 
-Route::delete('aluno/{id}', [AlunoController::class, 'destroy']);
+    Route::delete('aluno/{id}', 'destroy' )->name('aluno.destroy');
 
-Route::get('aluno/edit/{id}' , [AlunoController::class, 'edit']);
+    Route::get('aluno/edit/{alunoID}' ,  'edit')->name('aluno.edit');
 
-Route::post('aluno/edit/{id}' , [AlunoController::class, 'editar']);
+    Route::put('aluno/{id}' , 'update')->name('aluno.update');
+
+});
+

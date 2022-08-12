@@ -1,11 +1,4 @@
-@extends('layout')
-
-@section('cabecalho')
-<h2>Adicione uma nova criança</h2>
-@endsection
-
-
-@section('conteudo')
+<x-layout title="Adicione um novo aluno">
 
 <form method="POST">
     @csrf
@@ -36,7 +29,7 @@
     <button  class="btn btn-primary mt-4">Salvar</button>
   </form>
 
-@endsection
+</x-layout>
 
 
 

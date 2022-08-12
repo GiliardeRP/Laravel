@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('materia');
             $table->string('periodo');
 
-            $table->integer('id_professor');
-            $table->foreign('id_professor')->references('id')->on('professor');
+            
+            $table->foreignId('professor_id')->constrained()->onDelete('cascade');
+            $table->foreignId('aluno_id')->constrained()->onDelete('cascade');
+
         });
     }
 

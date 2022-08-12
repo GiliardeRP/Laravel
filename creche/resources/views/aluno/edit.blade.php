@@ -1,26 +1,37 @@
-@extends('layout')
+<x-layout title="Edite o cadastro: ">
 
-@section('cabecalho')
-    <h2>Edite o cadastro: </h2>
-
-@endsection
-
-@section('conteudo')
-
-<form  method="POST">
+<form action="{{route('aluno.update', $aluno->id)}}" method="POST">
     @csrf
-    <div class="row">
-        <div class="col col-8">
-        <label for="Nome" class="form-label">Nome</label>
-        <input type="text" class="form-control" name='nomeEditado' id="nomeEditado" value="{{$escolas->nome}}" >
-        </div>
 
-        <div class="col col-2">
-            <label for="Idade" class="form-label">Idade</label>
-            <input type="number" class="form-control" name="idadeEditado" id="idadeEditado" value="{{$escolas->idade}}">
-        </div>
-    </div>
+    @isset($aluno->nome)
+
+    @method('PUT')
+
+    @endisset
+    <div class="row">
+        <div class="col col-6">
+            <label for="Nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" name='nome' id="nomeEditado" value="{{$aluno->nome}}">
+            </div>
+
+
+            <div class="col col-6">
+                <label for="Matricula" class="form-label">Matricula</label>
+                <input type="text" class="form-control" name='matricula' id="matriculaAluno" value="{{$aluno->matricula}}">
+                </div>
+                <div class="col col-2">
+                    <label for="Idade" class="form-label">Idade</label>
+                    <input type="number" class="form-control" name="idade" id="idadeAluno" value="{{$aluno->idade}}">
+                </div>
+                <div class="col col-4">
+                    <label for="Cpf" class="form-label">Cpf</label>
+                    <input type="text" class="form-control" name='cpf' id="cpfAluno"value="{{$aluno->cpf}}" >
+                    </div>
+                    <div class="col col-12">
+                        <label for="Endereco" class="form-label">Endereco</label>
+                        <input type="text" class="form-control" name='endereco' id="enderecoAluno"value="{{$aluno->endereco}}" >
+                        </div>
     <button  class="btn btn-primary mt-4">Salvar</button>
   </form>
 
-@endsection
+</x-layout>
