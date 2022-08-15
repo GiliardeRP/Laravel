@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AlunoController;
+use App\Http\Controllers\PessoaController;
 use Illuminate\Support\Facades\Route;
 use app\Models\Creche;
 
@@ -15,20 +15,19 @@ use app\Models\Creche;
 |
 */
 
+Route::controller(PessoaController::class)->group(function () {
 
-Route::controller(AlunoController::class)->group(function () {
+    Route::get('/pessoa',  'index')->name('pessoa.index');
 
-    Route::get('/aluno',  'index')->name('aluno.index');
+    Route::get('/pessoa/create', 'create')->name('pessoa.create');
 
-    Route::get('/aluno/create', 'create')->name('aluno.create');
+    Route::post('pessoa/create', 'store')->name('pessoa.store');
 
-    Route::post('aluno/create', 'store')->name('aluno.store');
+    Route::delete('pessoa/{id}', 'destroy' )->name('pessoa.destroy');
 
-    Route::delete('aluno/{id}', 'destroy' )->name('aluno.destroy');
+    Route::get('pessoa/edit/{pessoaID}' ,  'edit')->name('pessoa.edit');
 
-    Route::get('aluno/edit/{alunoID}' ,  'edit')->name('aluno.edit');
-
-    Route::put('aluno/{id}' , 'update')->name('aluno.update');
+    Route::put('pessoa/{id}' , 'update')->name('pessoa.update');
 
 });
 

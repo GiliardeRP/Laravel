@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('materia');
             $table->string('periodo');
 
-            
-            $table->foreignId('professor_id')->constrained()->onDelete('cascade');
-            $table->foreignId('aluno_id')->constrained()->onDelete('cascade');
+
+
+            $table->foreignId('pessoa_id')->constrained()->onDelete('cascade');
 
         });
     }

@@ -21,13 +21,15 @@ class pessoaController extends Controller
 
     public function store(Request $request, Cadastro $cradastro){
 
+        
+
         $cradastro->cadastrar(
-            $request->nomepessoa,
-            $request->idadepessoa,
-            $request->matriculapessoa,
-            $request->enderecopessoa,
-            $request->cpfpessoa,
-            $request->salariopessoa
+            $request->nomePessoa,
+            $request->idadePessoa,
+            $request->matriculaPessoa,
+            $request->enderecoPessoa,
+            $request->cpfPessoa,
+            $request->salarioPessoa
         );
 
         return redirect()->route('pessoa.index');
