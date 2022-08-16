@@ -16,8 +16,6 @@
       <ul class="nav me-auto">
         @auth
 
-
-
         <li class="nav-item"><a href="{{route('home.index')}}" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
         <li class="nav-item"><a href="{{route('aluno.index')}}" class="nav-link link-dark px-2">Alunos </a></li>
         <li class="nav-item"><a href="{{route('professor.index')}}" class="nav-link link-dark px-2">Professores</a></li>
@@ -36,25 +34,35 @@
   </nav>
   <header class="py-3 mb-4 border-bottom">
     <div class="container d-flex flex-wrap justify-content-center">
-      <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+      <a href="#" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
 
         <span class="fs-4">{{$title}}</span>
       </a>
-      @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+
       {{-- <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
         @auth
 
         <input type="search" class="form-control" placeholder="Search..." aria-label="Search">@endauth
       </form> --}}
     </div>
+    <div class="container">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @isset($mensagemSucesso)
+
+        <div class="alert alert-success">
+            {{$mensagemSucesso}}
+        </div>
+    @endisset
+</div>
   </header>
 
   <div class="b-example-divider"></div>

@@ -1,7 +1,29 @@
 <x-layout title="Página Principal">
-
+    @csrf
     <div class="container">
 
+        @foreach ($users as $user)
+
+
+       <form action="home/email/{{$user->id}}" method="post">
+        @csrf
+        @method('PUT')
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <label for="">Habilitar/Desabilitar o envio de Email:</label>
+                <input type="checkbox"
+                           name="envioDeEmail"
+                           value="{{ $user->id }}"
+                           {{ $user->envioDeEmail ? 'checked' : '' }}>
+              </div>
+              <button class="btn btn-secondary mt-1">Salvar</button>
+            </div>
+
+          </div>
+
+        </form>
+        @endforeach
 
         <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
           <div class="col-md-6 px-0">

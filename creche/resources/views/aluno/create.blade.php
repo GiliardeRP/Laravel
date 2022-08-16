@@ -1,5 +1,7 @@
 <x-layout title="Adicione um novo Pessoa">
 
+    
+
 <form method="POST">
     @csrf
     <div class="row">

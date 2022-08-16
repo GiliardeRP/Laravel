@@ -9,6 +9,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Middleware\Authenticate;
 use App\Models\Turma;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -49,6 +50,7 @@ Route::controller(PessoaController::class)->group(function () {
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+Route::put('/home/email/{id}', [HomeController::class, 'email'])->name('home.email');
 
 
 Route::get('turma', [TurmaController::class, 'index'])->name('turma.index');
@@ -74,3 +76,27 @@ Route::get('/registro', [UsuarioController::class, 'create'])->name('usuario.cre
 
 
 Route::post('/registro', [UsuarioController::class, 'store'])->name('usuario.store');
+
+
+Route::get('/email', function(){
+    return new \App\Mail\EnvioEmail(
+        'pedro',
+        'removida'
+    );
+}
+);
+
+Route::get('/email/send', function(){
+    $email = new \App\Mail\EnvioEmail(
+        'pedro',
+        'removida'
+    );
+    $user=(object)[
+        'email' =>'g1l14rd3@gmail.com',
+        'name' =>'giga'
+    ];
+
+    Mail::to($user)->send($email);
+
+    return 'Email enviado';
+});

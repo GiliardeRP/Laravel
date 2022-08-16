@@ -1,17 +1,21 @@
 <?php
 
-namespace App\http\Controllers;
+namespace App\Http\Controllers;
 
-use App\Models\{Turma, Pessoa};
+use App\Http\Controllers\Controller;
+use App\Models\{Turma, Pessoa, User};
+use App\Service\EnviaEmail;
 use Illuminate\Http\Request;
 
-class TurmaController
+class TurmaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $turma = Turma::query()->get();
 
-        return view('turma.index')->with('turmas', $turma);
+        $mensagemSucesso = $request->session()->get('mensagem.sucesso');
+
+        return view('turma.index')->with('turmas', $turma)->with('mensagemSucesso', $mensagemSucesso);
     }
 
     public function create(){
@@ -21,43 +25,64 @@ class TurmaController
         return view('turma.create')->with('alunos', $aluno)->with('professores', $professor);
     }
 
-    public function store(Turma $turma, Pessoa $pessoa, Request $request){
+    public function store(Turma $turma, Pessoa $pessoa, Request $request, EnviaEmail $enviaEmail){
 
-        $ids = count($request->pessoa_id);
-
-
-        for ($i=1; $i<$ids ; $i++ ) {
-
-            $id = $request->pessoa_id[$i];
+        $ids = $request->pessoa_id[0];
 
             $turma = Turma::create([
                 'identificador' => $request->identificadorTurma,
                 'materia' => $request->materiaTurma,
                 'periodo' => $request->periodoTurma,
-                'pessoa_id' => $id
+                'pessoa_id' => $ids
 
             ]);
 
-        }
+            $users = User::all();
+            foreach($users as $user){
+
+            if($user->envioDeEmail == true){
+
+                            $enviaEmail->enviar($turma->identificador, 'CRIADA');
+                        }
+
+            }
 
 
+            $request->session()->flash('mensagem.sucesso','Turma foi adicionada com sucesso');
 
+        return to_route('turma.index');
+    }
+
+    public function destroy($id, Request $request, EnviaEmail $enviaEmail)
+    {
+
+        $pessoa= Turma::find($id);
+
+        $users = User::all();
+            foreach($users as $user){
+
+            if($user->envioDeEmail == true){
+
+                            $enviaEmail->enviar($pessoa->identificador, 'REMOVIDA');
+                        }
+
+            }
+
+        $pessoa->delete();
+        //pessoa::destroy($request->pessoa);
+
+        $request->session()->flash('mensagem.sucesso','Turma foi removida com sucesso');
 
 
         return to_route('turma.index');
     }
 
-    public function destroy($id, Request $request)
+    public function retornoJsonTurma()
     {
-
-        $pessoa= Turma::find($id);
-
-        $pessoa->delete();
-        //pessoa::destroy($request->pessoa);
-
-        $request->session()->flash('mensagem.sucesso','O pessoa foi removido com sucesso');
-
-        return to_route('turma.index');
+        return response()->json(
+            Turma::query()->get(),
+            200
+        );
     }
 }
 

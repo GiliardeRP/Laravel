@@ -8,6 +8,11 @@
         </div>
     @endisset
 
+    <div class="d-flex justify-content-between">
+        <a class="btn btn-primary " href="aluno/create">Adicionar</a>
+        <a class="btn btn-primary " href="api/json/aluno">Ver Json completo</a>
+    </div>
+
     @foreach ($pessoas as $pessoa)
     <ul class="list-group mt-2">
         <li class="list-group-item d-flex justify-content-between align-items-center" >
@@ -19,6 +24,7 @@
 
 
             <div class="d-flex justify-content-between">
+
             <a href="pessoa/editaluno/{{$pessoa->id}}" class= "btn btn-second" href="">Editar</a>
             <form action="/aluno/{{$pessoa->id}}" method="post" onsubmit= "return confirm('Tem certeza?')">
                 @csrf
@@ -27,13 +33,10 @@
         </form>
             </div>
         </li>
-
-
     </ul>
 
     @endforeach
 
-<a class="btn btn-primary mt-4" href="aluno/create">Adicionar</a>
 </form>
 
 </x-layot>

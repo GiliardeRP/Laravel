@@ -1,4 +1,4 @@
-<x-layout title="Adicione um novo Pessoa">
+<x-layout title="Adicione um novo Professor">
 
 <form method="POST">
     @csrf

@@ -8,6 +8,11 @@
         </div>
     @endisset
 
+    <div class="d-flex justify-content-between">
+        <a class="btn btn-primary " href="professor/create">Adicionar</a>
+        <a class="btn btn-primary " href="api/json/professor">Ver Json completo</a>
+    </div>
+
     @foreach ($pessoas as $pessoa)
     <ul class="list-group mt-2">
         <li class="list-group-item d-flex justify-content-between align-items-center" >
@@ -33,7 +38,6 @@
 
     @endforeach
 
-<a class="btn btn-primary mt-4" href="professor/create">Adicionar</a>
 </form>
 
 </x-layot>
