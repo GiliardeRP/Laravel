@@ -34,5 +34,30 @@
           </div>
         </div>
 
+        <div class="bg-light me-md-3 pt-3 px-3 px-md-5 text-center overflow-hidden">
+            <div class="my-3 p-3">
+              <h2 class="display-5">Funções do Sistema:</h2>
+
+            </div>
+            <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+
+                <ul class="list-group mt-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center mt-4 mx-2">
+                            Crud Completo de Alunos e professores
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center mt-4 mx-2">
+                        Criação e remoção de Turmas
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center mt-4 mx-2">
+                        Autentificação
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between aling-items-center mt-4 mx-2">
+                        Envio de e-mails(opcional) sempre que algum elemento for criado,alterado ou excluido.
+                    </li>
+                </ul>
+
+            </div>
+          </div>
+
     </div>
 </x-layout>
