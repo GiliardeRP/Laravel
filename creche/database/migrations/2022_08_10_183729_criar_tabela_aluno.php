@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('nome');
             $table->string('cpf');
             $table->string('endereco');
+            $table->string('tipo');
             $table->integer('idade');
             $table->float('salario');
+            $table->boolean('participa')->default(false);
 
 
         });

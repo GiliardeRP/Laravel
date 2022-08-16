@@ -1,6 +1,6 @@
 <x-layout title="Edite o cadastro: ">
 
-<form action="{{route('pessoa.update', $pessoa->id)}}" method="POST">
+<form action="{{route('aluno.update', $pessoa->id)}}" method="POST">
     @csrf
 
     @isset($pessoa->nome)
@@ -31,6 +31,14 @@
                         <label for="Endereco" class="form-label">Endereco</label>
                         <input type="text" class="form-control" name='endereco' id="enderecopessoa"value="{{$pessoa->endereco}}" >
                         </div>
+
+                        <div class="col col-12">
+                            <label for="tipo" class="form-label">Tipo:</label>
+                            <input type="radio" id="tipoPessoa" name="tipoPessoa" value="aluno">
+                            <label for="sexo-m">Aluno</label>
+                            <input type="radio" id="tipoPessoa" name="tipoPessoa" value="professor">
+                            <label for="sexo-m">Professor</label>
+                            </div>
     <button  class="btn btn-primary mt-4">Salvar</button>
   </form>
 

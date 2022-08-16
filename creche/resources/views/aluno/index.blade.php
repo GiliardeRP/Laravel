@@ -1,4 +1,4 @@
-<x-layout title="pessoas cadastrados:">
+<x-layout title="Alunos cadastrados:">
 
 
     @isset($mensagemSucesso)
@@ -16,11 +16,11 @@
             Idade: {{$pessoa->idade}}<br/>
             Cpf: {{$pessoa->cpf}}<br/>
             Endereço: {{$pessoa->endereco}}<br/>
-            Salario: {{$pessoa->salario}}
+
 
             <div class="d-flex justify-content-between">
-            <a href="pessoa/edit/{{$pessoa->id}}" class= "btn btn-second" href="">Editar</a>
-            <form action="/pessoa/{{$pessoa->id}}" method="post">
+            <a href="pessoa/editaluno/{{$pessoa->id}}" class= "btn btn-second" href="">Editar</a>
+            <form action="/aluno/{{$pessoa->id}}" method="post" onsubmit= "return confirm('Tem certeza?')">
                 @csrf
                 @method('DELETE')
             <button class= "btn btn-second">apagar</button>
@@ -33,7 +33,7 @@
 
     @endforeach
 
-<a class="btn btn-primary mt-4" href="pessoa/create">Adicionar</a>
+<a class="btn btn-primary mt-4" href="aluno/create">Adicionar</a>
 </form>
 
 </x-layot>

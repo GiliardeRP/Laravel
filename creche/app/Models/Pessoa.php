@@ -13,7 +13,7 @@ class Pessoa extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['idade', 'nome', 'matricula', 'cpf', 'endereco',  'salario'];
+    protected $fillable = ['idade', 'nome', 'matricula', 'cpf', 'endereco',  'salario', 'tipo'];
     protected $table = 'pessoa';
 
 

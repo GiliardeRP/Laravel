@@ -26,9 +26,15 @@
                     <input type="text" class="form-control" name='enderecoPessoa' id="enderecoPessoa" >
                     </div>
                     <div class="col col-12">
-                    <label for="Salario" class="form-label">Salario</label>
-                    <input type="text" class="form-control" name='salarioPessoa' id="salarioPessoa" >
-                    </div>
+                        <label for="tipo" class="form-label">Tipo:</label>
+                        <input type="radio" id="tipoPessoa" name="tipoPessoa" value="aluno">
+                        <label for="sexo-m">Aluno</label>
+                        <input type="radio" id="tipoPessoa" name="tipoPessoa" value="professor">
+                        <label for="sexo-m">Professor</label>
+                        </div>
+
+
+
     </div>
     <button  class="btn btn-primary mt-4">Salvar</button>
   </form>

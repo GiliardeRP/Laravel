@@ -14,15 +14,23 @@
         <nav class="py-2 bg-light border-bottom">
     <div class="container d-flex flex-wrap">
       <ul class="nav me-auto">
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Salas</a></li>
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Professores</a></li>
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Turmas</a></li>
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Sobre</a></li>
+        @auth
+
+
+
+        <li class="nav-item"><a href="{{route('home.index')}}" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="{{route('aluno.index')}}" class="nav-link link-dark px-2">Alunos </a></li>
+        <li class="nav-item"><a href="{{route('professor.index')}}" class="nav-link link-dark px-2">Professores</a></li>
+        <li class="nav-item"><a href="{{route('turma.index')}}" class="nav-link link-dark px-2">Turmas</a></li>
+        @endauth
+
       </ul>
       <ul class="nav">
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Login</a></li>
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Sign up</a></li>
+        <!--<li class="nav-item"><a href="#" class="nav-link link-dark px-2">Login</a></li>-->
+        @auth
+
+        <li class="nav-item"><a href="{{route('logout')}}" class="nav-link link-dark px-2">Sair</a></li>
+        @endauth
       </ul>
     </div>
   </nav>
@@ -32,9 +40,20 @@
 
         <span class="fs-4">{{$title}}</span>
       </a>
-      <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-      </form>
+      @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+      {{-- <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+        @auth
+
+        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">@endauth
+      </form> --}}
     </div>
   </header>
 

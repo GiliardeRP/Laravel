@@ -11,7 +11,7 @@ class Cadastro{
 
 
 
-    public function cadastrar(string $nomePessoa, int $idade, string $matricula, string $cpf, string $endereco, string $salario ): Pessoa{
+    public function cadastrar(string $nomePessoa, int $idade, string $matricula, string $cpf, string $endereco, string $salario, string $tipo): Pessoa{
 
 
         $pessoa = Pessoa::create([
@@ -20,7 +20,8 @@ class Cadastro{
             'cpf' => $cpf,
             'endereco' => $endereco,
             'matricula' => $matricula,
-            'salario' => $salario
+            'salario' => $salario,
+            'tipo' => $tipo
         ]);
 
         return $pessoa;
