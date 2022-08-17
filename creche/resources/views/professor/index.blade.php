@@ -2,9 +2,8 @@
 
 
     @isset($mensagemSucesso)
-
         <div class="alert alert-success">
-            {{$mensagemSucesso}}
+            {{ $mensagemSucesso }}
         </div>
     @endisset
 
@@ -14,30 +13,30 @@
     </div>
 
     @foreach ($pessoas as $pessoa)
-    <ul class="list-group mt-2">
-        <li class="list-group-item d-flex justify-content-between align-items-center" >
-            Matricula: {{$pessoa->matricula}}<br/>
-            Nome: {{$pessoa->nome}} <br/>
-            Idade: {{$pessoa->idade}}<br/>
-            Cpf: {{$pessoa->cpf}}<br/>
-            Endereço: {{$pessoa->endereco}}<br/>
-            Salario: {{$pessoa->salario}}
+        <ul class="list-group mt-2">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Matricula: {{ $pessoa->matricula }}<br />
+                Nome: {{ $pessoa->nome }} <br />
+                Idade: {{ $pessoa->idade }}<br />
+                Cpf: {{ $pessoa->cpf }}<br />
+                Endereço: {{ $pessoa->endereco }}<br />
+                Salario: {{ $pessoa->salario }}
 
-            <div class="d-flex justify-content-between">
-            <a href="pessoa/editprofessor/{{$pessoa->id}}" class= "btn btn-second" href="">Editar</a>
-            <form action="/professor/{{$pessoa->id}}" method="post" onsubmit= "return confirm('Tem certeza?')">
-                @csrf
-                @method('DELETE')
-            <button class= "btn btn-second">apagar</button>
-        </form>
-            </div>
-        </li>
+                <div class="d-flex justify-content-between">
+                    <a href="pessoa/editprofessor/{{ $pessoa->id }}" class="btn btn-second" href="">Editar</a>
+                    <form action="/professor/{{ $pessoa->id }}" method="post"
+                        onsubmit="return confirm('Tem certeza que deseja apagar?')">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-second">Apagar</button>
+                    </form>
+                </div>
+            </li>
 
 
-    </ul>
-
+        </ul>
     @endforeach
 
-</form>
+    </form>
 
-</x-layot>
+    </x-layot>

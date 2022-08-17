@@ -1,4 +1,4 @@
-<x-layout title="Registro de usuario:" >
+<x-layout title="Registro de usuario:">
 
     <form method="post">
         @csrf

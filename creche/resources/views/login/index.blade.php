@@ -15,7 +15,7 @@
             Entrar
         </button>
 
-        <a href="{{route('usuario.create')}}" class="btn btn-secondary mt-3">
+        <a href="{{ route('usuario.create') }}" class="btn btn-secondary mt-3">
             Registrar
         </a>
     </form>
