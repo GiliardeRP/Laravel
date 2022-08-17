@@ -1,14 +1,9 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PessoaController;
-use App\Http\Middleware\Autenticador;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\TurmaController;
-use App\Http\Controllers\UsuarioController;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{HomeController, PessoaController, LoginController, TurmaController, UsuarioController};
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\Autenticador;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,31 +55,3 @@ Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 
 Route::get('/registro', [UsuarioController::class, 'create'])->name('usuario.create');
 Route::post('/registro', [UsuarioController::class, 'store'])->name('usuario.store');
-
-
-Route::get(
-    '/email',
-    function () {
-        return new \App\Mail\EnvioEmail(
-            'pedro',
-            'removida'
-        );
-    }
-);
-
-Route::get('/email/send', function () {
-
-    $email = new \App\Mail\EnvioEmail(
-        'pedro',
-        'removida'
-    );
-
-    $user = (object)[
-        'email' => 'g1l14rd3@gmail.com',
-        'name' => 'giga'
-    ];
-
-    Mail::to($user)->send($email);
-
-    return 'Email enviado';
-});
