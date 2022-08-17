@@ -43,10 +43,7 @@
 
                 <ul class="list-group mt-3">
                     <li class="list-group-item d-flex justify-content-between align-items-center mt-4 mx-2">
-                            Crud Completo de Alunos e professores
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center mt-4 mx-2">
-                        Criação e remoção de Turmas
+                        Crud Completo de Alunos, Professores e Turmas
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center mt-4 mx-2">
                         Autentificação
