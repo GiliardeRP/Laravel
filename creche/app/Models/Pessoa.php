@@ -13,7 +13,4 @@ class Pessoa extends Model
 
     protected $fillable = ['idade', 'nome', 'matricula', 'cpf', 'endereco',  'salario', 'tipo'];
     protected $table = 'pessoa';
-
-   
-
 }
