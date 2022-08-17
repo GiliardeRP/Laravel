@@ -21,50 +21,46 @@ class TurmaController extends Controller
         return view('turma.index')->with('turmas', $turma)->with('mensagemSucesso', $mensagemSucesso);
     }
 
-    public function create(){
+    public function create()
+    {
         $aluno = Pessoa::all()->where('tipo', 'aluno');
         $professor = Pessoa::all()->where('tipo', 'professor');
 
         return view('turma.create')->with('alunos', $aluno)->with('professores', $professor);
     }
 
-    public function store(Turma $turma, Request $request, EnviaEmail $enviaEmail){
-
+    public function store(Turma $turma, Request $request, EnviaEmail $enviaEmail)
+    {
         //dd(auth()->user());
 
-        $ids=$request->pessoa_id;
-
-
+        $ids = $request->pessoa_id;
 
         DB::beginTransaction();
 
-            $turma = Turma::create([
-                'identificador' => $request->identificadorTurma,
-                'materia' => $request->materiaTurma,
-                'periodo' => $request->periodoTurma,
-            ]);
+        $turma = Turma::create([
+            'identificador' => $request->identificadorTurma,
+            'materia' => $request->materiaTurma,
+            'periodo' => $request->periodoTurma,
+        ]);
 
-            if(isset($request->pessoa_id)){
-                foreach($ids as $id){
-                    $turma->pessoa()->attach($id);
-
-                }
-          }
-
-
-            DB::commit();
-
-            $users = User::all();
-            foreach($users as $user){
-
-            if($user->envioDeEmail == true){
-
-                            $enviaEmail->enviar($turma->identificador, 'CRIADA');
-                        }
-
+        if (isset($request->pessoa_id)) {
+            foreach ($ids as $id) {
+                $turma->pessoa()->attach($id);
             }
+        }
 
-            $request->session()->flash('mensagem.sucesso','Turma foi adicionada com sucesso');
+        DB::commit();
+
+        $users = User::all();
+        foreach ($users as $user) {
+
+            if ($user->envioDeEmail == true) {
+
+                $enviaEmail->enviar($turma->identificador, 'CRIADA');
+            }
+        }
+
+        $request->session()->flash('mensagem.sucesso', 'Turma foi adicionada com sucesso');
 
         return to_route('turma.index');
     }
@@ -72,23 +68,21 @@ class TurmaController extends Controller
     public function destroy($id, Request $request, EnviaEmail $enviaEmail)
     {
 
-        $pessoa= Turma::find($id);
+        $pessoa = Turma::find($id);
 
         $users = User::all();
-            foreach($users as $user){
+        foreach ($users as $user) {
 
-            if($user->envioDeEmail == true){
+            if ($user->envioDeEmail == true) {
 
-                            $enviaEmail->enviar($pessoa->identificador, 'REMOVIDA');
-                        }
+                $enviaEmail->enviar($pessoa->identificador, 'REMOVIDA');
             }
-
+        }
 
         $pessoa->delete();
         //pessoa::destroy($request->pessoa);
 
-        $request->session()->flash('mensagem.sucesso','Turma foi removida com sucesso');
-
+        $request->session()->flash('mensagem.sucesso', 'Turma foi removida com sucesso');
 
         return to_route('turma.index');
     }
@@ -105,45 +99,38 @@ class TurmaController extends Controller
     public function update($id, Request $request, EnviaEmail $enviaEmail)
     {
 
-
-
-        $ids=$request->pessoa_id;
-
-
+        $ids = $request->pessoa_id;
 
         DB::beginTransaction();
 
-        $turma= Turma::find($id);
+        $turma = Turma::find($id);
 
         $turma->delete();
 
-            $turma = Turma::create([
-                'identificador' => $request->identificadorTurma,
-                'materia' => $request->materiaTurma,
-                'periodo' => $request->periodoTurma,
-            ]);
+        $turma = Turma::create([
+            'identificador' => $request->identificadorTurma,
+            'materia' => $request->materiaTurma,
+            'periodo' => $request->periodoTurma,
+        ]);
 
-
-            if(isset($request->pessoa_id)){
-                foreach($ids as $id){
-                    $turma->pessoa()->attach($id);
-
-                }
-          }
-
-            DB::commit();
-
-            $users = User::all();
-            foreach($users as $user){
-
-            if($user->envioDeEmail == true){
-
-                            $enviaEmail->enviar($turma->identificador, 'Editada');
-                        }
-
+        if (isset($request->pessoa_id)) {
+            foreach ($ids as $id) {
+                $turma->pessoa()->attach($id);
             }
+        }
 
-            $request->session()->flash('mensagem.sucesso','Turma foi editada com sucesso');
+        DB::commit();
+
+        $users = User::all();
+        foreach ($users as $user) {
+
+            if ($user->envioDeEmail == true) {
+
+                $enviaEmail->enviar($turma->identificador, 'Editada');
+            }
+        }
+
+        $request->session()->flash('mensagem.sucesso', 'Turma foi editada com sucesso');
 
         return to_route('turma.index');
     }
@@ -155,43 +142,32 @@ class TurmaController extends Controller
 
         $turma = Turma::find($id);
 
+        $pessoas = $turma->pessoa;
 
-        $pessoas=$turma->pessoa;
-
-
-
-        foreach($pessoas as $professor){
-            if($professor->tipo == 'professor'){
-            $professorList[] = $professor;
-            }
-
-
-        }
-
-        foreach($pessoas as $aluno){
-            if($aluno->tipo == 'aluno'){
-            $alunoList[] = $aluno;
+        foreach ($pessoas as $professor) {
+            if ($professor->tipo == 'professor') {
+                $professorList[] = $professor;
             }
         }
 
+        foreach ($pessoas as $aluno) {
+            if ($aluno->tipo == 'aluno') {
+                $alunoList[] = $aluno;
+            }
+        }
 
-        if(isset($professorList)){
+        if (isset($professorList)) {
 
-            if(isset($alunoList)){
+            if (isset($alunoList)) {
                 return view('turma.list')->with('turma', $turma)->with('alunos', $alunoList)->with('professores', $professorList);
-
             }
             return view('turma.list')->with('turma', $turma)->with('professores', $professorList);
+        }
 
-         }
-
-         if(isset($alunoList)){
+        if (isset($alunoList)) {
             return view('turma.list')->with('turma', $turma)->with('alunos', $alunoList);
-
         }
         return view('turma.list')->with('turma', $turma);
-
-
     }
 
     public function retornoJsonTurma()
@@ -200,13 +176,11 @@ class TurmaController extends Controller
         $turma = Turma::query()->get();
         $pessoa = Pessoa::query()->get();
 
-        return response()->json([
-            $turma, $pessoa],
+        return response()->json(
+            [
+                $turma, $pessoa
+            ],
             200
         );
     }
-
-
-
 }
-
