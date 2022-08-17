@@ -13,7 +13,7 @@
                             <input type="checkbox" name="envioDeEmail" value="{{ $user->id }}"
                                 {{ $user->envioDeEmail ? 'checked' : '' }}>
                         </div>
-                        <button class="btn btn-secondary mt-1">Salvar</button>
+                        <button class="btn btn-secondary mt-2">Salvar</button>
                     </div>
 
                 </div>
