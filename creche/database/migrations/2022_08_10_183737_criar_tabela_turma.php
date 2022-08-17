@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('turma', function(Blueprint $table){
+        Schema::create('turma', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('identificador');
             $table->string('materia');
             $table->string('periodo');
 
-           // $table->foreignId('pessoa_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('pessoa_id')->constrained()->onDelete('cascade');
 
             // $table->integer('pessoa_id');
             // $table->foreign('pessoa_id')
@@ -37,6 +37,5 @@ return new class extends Migration
     public function down()
     {
         Schema::drop('turma');
-
     }
 };
