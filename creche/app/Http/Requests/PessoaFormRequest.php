@@ -29,7 +29,8 @@ class PessoaFormRequest extends FormRequest
             'idadePessoa' => ['required', 'min:1'],
             'cpfPessoa' => ['required' , 'min:8'],
             'enderecoPessoa' => ['required' , 'min:2'],
-            'tipoPessoa' => ['required' ]
+            'tipoPessoa' => ['required' ],
+            
         ];
     }
 }

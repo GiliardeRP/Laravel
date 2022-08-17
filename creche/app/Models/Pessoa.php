@@ -9,16 +9,11 @@ class Pessoa extends Model
 {
     use HasFactory;
 
-
-
     public $timestamps = false;
 
     protected $fillable = ['idade', 'nome', 'matricula', 'cpf', 'endereco',  'salario', 'tipo'];
     protected $table = 'pessoa';
 
-
-    public function Pessoa(){
-        return $this->belongsTo(Turma::class);
-    }
+   
 
 }

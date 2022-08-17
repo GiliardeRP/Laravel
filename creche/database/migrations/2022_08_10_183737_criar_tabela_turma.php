@@ -21,10 +21,10 @@ return new class extends Migration
 
            // $table->foreignId('pessoa_id')->constrained()->onDelete('cascade');
 
-            $table->integer('pessoa_id');
-            $table->foreign('pessoa_id')
-            ->references('id')
-            ->on('pessoa')->onDelete('cascade');
+            // $table->integer('pessoa_id');
+            // $table->foreign('pessoa_id')
+            // ->references('id')
+            // ->on('pessoa')->onDelete('cascade');
 
         });
     }

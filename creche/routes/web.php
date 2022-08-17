@@ -59,7 +59,13 @@ Route::get('turma/create', [TurmaController::class, 'create'])->name('turma.crea
 
 Route::post('turma/create', [TurmaController::class, 'store'])->name('turma.store');
 
+Route::get('turma/edit/{id}',[TurmaController::class, 'edit'] )->name('turma.edit');
+
+Route::put('turma/edit/{id}',[TurmaController::class, 'update'] )->name('turma.update');
+
 Route::delete('turma/{id}',[TurmaController::class, 'destroy'] )->name('turma.destroy');
+
+Route::get('/turma/list/{id}', [TurmaController::class, 'list'])->name('listar.turma');
 
 });
 
@@ -76,6 +82,7 @@ Route::get('/registro', [UsuarioController::class, 'create'])->name('usuario.cre
 
 
 Route::post('/registro', [UsuarioController::class, 'store'])->name('usuario.store');
+
 
 
 Route::get('/email', function(){

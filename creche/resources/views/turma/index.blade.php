@@ -15,12 +15,15 @@
     @foreach ($turmas as $turma)
     <ul class="list-group mt-2">
         <li class="list-group-item d-flex justify-content-between align-items-center" >
+
             Turma:  {{$turma->identificador}}<br/>
             Materia: {{$turma->materia}} <br/>
             Periodo: {{$turma->periodo}}
 
 
             <div class="d-flex justify-content-between">
+                <a href="turma/list/{{$turma->id}}" class= "btn btn-second" href="">Ver Turma</a>
+                <a href="turma/edit/{{$turma->id}}" class= "btn btn-second" href="">Editar</a>
 
             <form action="{{ route('turma.destroy', $turma->id) }}" method="post">
                 @csrf
