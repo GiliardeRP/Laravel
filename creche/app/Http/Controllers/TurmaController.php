@@ -43,10 +43,14 @@ class TurmaController extends Controller
             'periodo' => $request->periodoTurma,
         ]);
 
+
         if (isset($request->pessoa_id)) {
+            $arrIds = [];
             foreach ($ids as $id) {
-                $turma->pessoa()->attach($id);
+                $arrIds[] = $id;
             }
+
+            $turma->pessoa()->sync($arrIds);
         }
 
         DB::commit();

@@ -3,82 +3,68 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
-use App\Models\Episodios;
-use App\Models\Serie;
-use App\Models\Temporadas;
-use App\Services\CriadorDeSerie;
-use App\Services\RemovedorDeSerie;
+use App\Jobs\DeleteSeriesCover;
+use App\Models\Series;
+use App\Repositories\SeriesRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use LDAP\Result;
-use PhpParser\Node\Stmt\Foreach_;
 
 class SeriesController extends Controller
 {
-
-    public function __contruct()
+    public function __construct(private SeriesRepository $repository)
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index');
     }
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
+        $series = Series::all();
+        $mensagemSucesso = session('mensagem.sucesso');
 
-
-        $series = Serie::query()
-        ->orderBy('nome')
-        ->get();
-
-        $mensagem = $request->session()->get('mensagem');
-
-        return view ('series.index' , compact('series', 'mensagem'));
-        //return view ('series.index' ,[
-        //    'series' => $series
-        //]);
+        return view('series.index')->with('series', $series)
+            ->with('mensagemSucesso', $mensagemSucesso);
     }
 
-    public function create(){
-
-        return view ('series.create');
+    public function create()
+    {
+        return view('series.create');
     }
 
-    public function store(
-        SeriesFormRequest $request,
-        CriadorDeSerie $criadorDeSerie
-    ) {
-        $serie = $criadorDeSerie->criarSerie(
-            $request->nome,
-            $request->qtd_temporadas,
-            $request->ep_por_temporada
+    public function store(SeriesFormRequest $request)
+    {
+        $coverPath = $request->file('cover')?->store('series_cover', 'public');
+        $request->coverPath = $coverPath;
+        $serie = $this->repository->add($request);
+        \App\Events\SeriesCreated::dispatch(
+            $serie->nome,
+            $serie->id,
+            $request->seasonsQty,
+            $request->episodesPerSeason,
         );
 
-        $request->session()
-            ->flash(
-                'mensagem',
-                "Série {$serie->id} e suas temporadas e episódios criados com sucesso {$serie->nome}"
-            );
-
-        return redirect()->route('listar_series');
+        return to_route('series.index')
+            ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
     }
 
-    public function destroy(Request $request, RemovedorDeSerie $removedorDeSerie)
+    public function destroy(Series $series)
     {
-        $nomeSerie = $removedorDeSerie->removerSerie($request->id);
-        $request->session()
-            ->flash(
-                'mensagem',
-                "Série $nomeSerie removida com sucesso"
-            );
-        return redirect()->route('listar_series');
+        $series->delete();
+        DeleteSeriesCover::dispatch($series->cover);
+
+        return to_route('series.index')
+            ->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso");
     }
 
-    public function editaNome(int $id, Request $request)
+    public function edit(Series $series)
     {
-        $novoNome = $request->nome;
-        $serie = Serie::find($id);
-        $serie->nome = $novoNome;
-        $serie->save();
+        return view('series.edit')->with('serie', $series);
     }
 
+    public function update(Series $series, SeriesFormRequest $request)
+    {
+        $series->fill($request->all());
+        $series->save();
 
-
+        return to_route('series.index')
+            ->with('mensagem.sucesso', "Série '{$series->nome}' atualizada com sucesso");
+    }
 }
