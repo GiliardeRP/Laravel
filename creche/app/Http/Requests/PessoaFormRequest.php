@@ -25,12 +25,12 @@ class PessoaFormRequest extends FormRequest
     {
         return [
             'nomePessoa' => ['required', 'min:3'],
-           'matriculaPessoa' => ['required' , 'min:3'],
+            'matriculaPessoa' => ['required', 'min:3'],
             'idadePessoa' => ['required', 'min:1'],
-            'cpfPessoa' => ['required' , 'min:8'],
-            'enderecoPessoa' => ['required' , 'min:2'],
-            'tipoPessoa' => ['required' ],
-            
+            'cpfPessoa' => ['required', 'min:8'],
+            'enderecoPessoa' => ['required', 'min:2'],
+            'tipoPessoa' => ['required'],
+
         ];
     }
 }
