@@ -15,18 +15,18 @@ class PessoaController extends Controller
 {
     public function indexAluno(Request $request)
     {
-        $pessoas = Pessoa::query()->where('tipo','aluno')->get();
+        $pessoas = Pessoa::query()->where('tipo', 'aluno')->get();
 
         $mensagemSucesso = $request->session()->get('mensagem.sucesso');
 
-        return view('aluno.index')->with('pessoas' , $pessoas)->with('mensagemSucesso', $mensagemSucesso);
+        return view('aluno.index')->with('pessoas', $pessoas)->with('mensagemSucesso', $mensagemSucesso);
     }
 
     public function indexProfessor(Request $request)
     {
-        $pessoas = Pessoa::query()->where('tipo','professor')->get();
+        $pessoas = Pessoa::query()->where('tipo', 'professor')->get();
         $mensagemSucesso = $request->session()->get('mensagem.sucesso');
-        return view('professor.index')->with('pessoas' , $pessoas)->with('mensagemSucesso', $mensagemSucesso);
+        return view('professor.index')->with('pessoas', $pessoas)->with('mensagemSucesso', $mensagemSucesso);
     }
     public function createAluno()
     {
@@ -37,10 +37,10 @@ class PessoaController extends Controller
         return view('professor.create');
     }
 
-    public function store(PessoaFormRequest $request, Cadastro $cradastro, EnviaEmail $enviaEmail){
+    public function store(PessoaFormRequest $request, Cadastro $cradastro, EnviaEmail $enviaEmail)
+    {
 
-
-        if(!isset($request->salarioPessoa)){
+        if (!isset($request->salarioPessoa)) {
 
             $cradastro->cadastrar(
                 $request->nomePessoa,
@@ -53,18 +53,15 @@ class PessoaController extends Controller
             );
 
             $users = User::all();
-            foreach($users as $user){
+            foreach ($users as $user) {
 
-            if($user->envioDeEmail == true){
+                if ($user->envioDeEmail == true) {
 
-                            $enviaEmail->enviar($request->nomePessoa, 'ADICIONADA');
-                        }
-
+                    $enviaEmail->enviar($request->nomePessoa, 'ADICIONADA');
+                }
             }
 
-
-
-            $request->session()->flash('mensagem.sucesso','Pessoa foi adicionada com sucesso');
+            $request->session()->flash('mensagem.sucesso', 'Pessoa foi adicionada com sucesso');
 
             return redirect()->route('aluno.index');
         }
@@ -80,83 +77,72 @@ class PessoaController extends Controller
         );
 
         $users = User::all();
-            foreach($users as $user){
+        foreach ($users as $user) {
 
-            if($user->envioDeEmail == true){
+            if ($user->envioDeEmail == true) {
 
-                            $enviaEmail->enviar($request->nomePessoa, 'ADICIONADA');
-                        }
-
+                $enviaEmail->enviar($request->nomePessoa, 'ADICIONADA');
             }
+        }
 
-
-
-        $request->session()->flash('mensagem.sucesso','Pessoa foi adicionada com sucesso');
+        $request->session()->flash('mensagem.sucesso', 'Pessoa foi adicionada com sucesso');
 
         return redirect()->route('professor.index');
     }
     public function destroyAluno($id, Request $request, EnviaEmail $enviaEmail)
     {
 
-        $pessoa= Pessoa::find($id);
-
+        $pessoa = Pessoa::find($id);
         $users = User::all();
-            foreach($users as $user){
 
-            if($user->envioDeEmail == true){
+        foreach ($users as $user) {
 
-                            $enviaEmail->enviar($pessoa->nome, 'DELETADA');
-                        }
+            if ($user->envioDeEmail == true) {
 
+                $enviaEmail->enviar($pessoa->nome, 'DELETADA');
             }
-
+        }
 
         $pessoa->delete();
-        //pessoa::destroy($request->pessoa);
 
-        $request->session()->flash('mensagem.sucesso','Pessoa foi removida com sucesso');
-
+        $request->session()->flash('mensagem.sucesso', 'Pessoa foi removida com sucesso');
         return to_route('aluno.index');
     }
     public function destroyProfessor($id, Request $request, EnviaEmail $enviaEmail)
     {
 
-        $pessoa= Pessoa::find($id);
+        $pessoa = Pessoa::find($id);
 
         $users = User::all();
-            foreach($users as $user){
 
-            if($user->envioDeEmail == true){
+        foreach ($users as $user) {
 
-                            $enviaEmail->enviar($pessoa->nome, 'DELETADA');
-                        }
+            if ($user->envioDeEmail == true) {
 
+                $enviaEmail->enviar($pessoa->nome, 'DELETADA');
             }
+        }
 
 
         $pessoa->delete();
-        //pessoa::destroy($request->pessoa);
-
-        $request->session()->flash('mensagem.sucesso','Pessoa foi removida com sucesso');
+        $request->session()->flash('mensagem.sucesso', 'Pessoa foi removida com sucesso');
 
         return to_route('professor.index');
     }
-    public function editAluno(int $pessoaid )
+    public function editAluno(int $pessoaid)
     {
-        $pessoa= Pessoa::find($pessoaid);
+        $pessoa = Pessoa::find($pessoaid);
 
-            return view('aluno.edit')->with('pessoa', $pessoa );
+        return view('aluno.edit')->with('pessoa', $pessoa);
+    }
 
-        }
 
-
-    public function editProfessor(int $pessoaid )
+    public function editProfessor(int $pessoaid)
     {
-        $pessoa= Pessoa::find($pessoaid);
+        $pessoa = Pessoa::find($pessoaid);
 
-        return view('professor.edit')->with('pessoa', $pessoa );
-
-        }
+        return view('professor.edit')->with('pessoa', $pessoa);
+    }
 
 
     public function updateAluno(Request $request, $id, EnviaEmail $enviaEmail)
@@ -166,19 +152,16 @@ class PessoaController extends Controller
         $pessoa->update($request->all());
 
         $users = User::all();
-            foreach($users as $user){
+        foreach ($users as $user) {
 
-            if($user->envioDeEmail == true){
+            if ($user->envioDeEmail == true) {
 
-                            $enviaEmail->enviar($pessoa->nome, 'EDITADA');
-                        }
-
+                $enviaEmail->enviar($pessoa->nome, 'EDITADA');
             }
+        }
 
-        $request->session()->flash('mensagem.sucesso','Pessoa foi alterada com sucesso');
+        $request->session()->flash('mensagem.sucesso', 'Pessoa foi alterada com sucesso');
         return to_route('aluno.index');
-
-
     }
 
     public function updateProfessor(Request $request, $id, EnviaEmail $enviaEmail)
@@ -188,31 +171,29 @@ class PessoaController extends Controller
         $pessoa->update($request->all());
 
         $users = User::all();
-            foreach($users as $user){
+        foreach ($users as $user) {
 
-            if($user->envioDeEmail == true){
+            if ($user->envioDeEmail == true) {
 
-                            $enviaEmail->enviar($pessoa->nome, 'EDITADA');
-                        }
-
+                $enviaEmail->enviar($pessoa->nome, 'EDITADA');
             }
+        }
 
-        $request->session()->flash('mensagem.sucesso','Pessoa foi alterada com sucesso');
+        $request->session()->flash('mensagem.sucesso', 'Pessoa foi alterada com sucesso');
         return to_route('professor.index');
     }
     public function retornoJsonAluno()
     {
         return response()->json(
-            Pessoa::query()->where('tipo','aluno')->get(),
+            Pessoa::query()->where('tipo', 'aluno')->get(),
             200
         );
     }
     public function retornoJsonProfessor()
     {
         return response()->json(
-            Pessoa::query()->where('tipo','professor')->get(),
+            Pessoa::query()->where('tipo', 'professor')->get(),
             200
         );
     }
-
 }
