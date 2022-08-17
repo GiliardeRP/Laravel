@@ -24,6 +24,5 @@ class UsuarioController extends Controller
         Auth::login($usuario);
 
         return to_route('home.index');
-
     }
 }
