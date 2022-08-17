@@ -49,7 +49,7 @@
                         Autentificação
                     </li>
                     <li class="list-group-item d-flex justify-content-between aling-items-center mt-4 mx-2">
-                        Envio de e-mails(opcional) sempre que algum elemento for criado,alterado ou excluido.
+                        Envio de e-mails(opcional) sempre que algum elemento for criado, alterado ou excluido.
                     </li>
                 </ul>
 
