@@ -12,9 +12,10 @@ class Turma extends Model
     public $timestamps = false;
 
     protected $table = 'turma';
-    protected $fillable = ['identificador', 'materia' ,'periodo'];
+    protected $fillable = ['identificador', 'materia', 'periodo'];
 
-    public function pessoa(){
+    public function pessoa()
+    {
         return $this->belongsToMany(Pessoa::class);
     }
 }
