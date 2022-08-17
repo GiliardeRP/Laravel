@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pessoa_turma', function(Blueprint $table){
+        Schema::create('pessoa_turma', function (Blueprint $table) {
 
-        $table->foreignId('pessoa_id')->constrained('pessoa')->onDelete('cascade');
+            $table->foreignId('pessoa_id')->constrained('pessoa')->onDelete('cascade');
             $table->foreignId('turma_id')->constrained('turma')->onDelete('cascade');
-
-
 
             $table->timestamps();
         });
