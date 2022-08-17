@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Service;
 
 
@@ -8,17 +9,17 @@ use Illuminate\Support\Facades\Mail;
 
 
 
-class EnviaEmail{
+class EnviaEmail
+{
 
 
 
     public function enviar($nomePessoa, $status)
     {
-        $email = new EnvioEmail($nomePessoa, $status );
+        $email = new EnvioEmail($nomePessoa, $status);
 
-            $user = (object)[ 'email' => 'g1l14rd3@gmail.com', 'name' => 'Giliarde'];
+        $user = (object)['email' => 'g1l14rd3@gmail.com', 'name' => 'Giliarde'];
 
-            Mail::to($user)->send($email);
+        Mail::to($user)->send($email);
     }
-
 }
