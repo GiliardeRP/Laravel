@@ -9,7 +9,7 @@
 
     <div class="d-flex justify-content-between">
         <a class="btn btn-primary " href="professor/create">Adicionar</a>
-        <a class="btn btn-primary " href="api/json/professor">Ver Json completo</a>
+        <a class="btn btn-primary " href="api/json/professor">Ver Json Completo</a>
     </div>
 
     @foreach ($pessoas as $pessoa)
