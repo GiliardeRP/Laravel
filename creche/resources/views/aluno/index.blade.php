@@ -9,7 +9,7 @@
 
     <div class="d-flex justify-content-between">
         <a class="btn btn-primary " href="aluno/create">Adicionar</a>
-        <a class="btn btn-primary " href="api/json/aluno">Ver Json completo</a>
+        <a class="btn btn-primary " href="api/json/aluno">Ver Json Completo</a>
     </div>
 
     @foreach ($pessoas as $pessoa)
@@ -29,7 +29,7 @@
                         onsubmit="return confirm('Tem certeza que deseja apagar?')">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-second">apagar</button>
+                        <button class="btn btn-second">Apagar</button>
                     </form>
                 </div>
             </li>
