@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pessoa', function (Blueprint $table){
+        Schema::create('pessoa', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('matricula');
             $table->string('nome');
@@ -23,8 +23,6 @@ return new class extends Migration
             $table->integer('idade');
             $table->float('salario');
             $table->boolean('participa')->default(false);
-
-
         });
     }
 
